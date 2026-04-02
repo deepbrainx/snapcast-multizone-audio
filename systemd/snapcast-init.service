@@ -1,0 +1,12 @@
+[Unit]
+Description=Snapcast group stream assignments
+After=snapserver.service
+Requires=snapserver.service
+
+[Service]
+ExecStart=/usr/local/bin/snapcast-init.sh
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

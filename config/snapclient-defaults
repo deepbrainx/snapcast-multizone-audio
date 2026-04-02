@@ -1,0 +1,3 @@
+# Kitchen zone snapclient
+# Adjust hw:3,0 to match your actual card number (check with: aplay -l)
+SNAPCLIENT_OPTS="--host localhost --soundcard hw:3,0 --hostID kitchen"

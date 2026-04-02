@@ -1,0 +1,11 @@
+[Unit]
+Description=Snapcast client - Dining
+After=network.target snapserver.service
+
+[Service]
+# Adjust hw:4,0 to match your actual card number (check with: aplay -l)
+ExecStart=/usr/bin/snapclient --logsink=system --host localhost --soundcard hw:4,0 --hostID dining
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

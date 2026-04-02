@@ -1,0 +1,54 @@
+alias: Hourly time announcement
+description: >
+  Announces the current hour in kitchen and dining room ceiling speakers.
+  Plays between 6 AM and 1 AM. Uses Piper TTS via Chime TTS, piped to
+  Snapcast via SSH+ffmpeg.
+  
+  Prerequisites:
+    - Chime TTS installed (HACS)
+    - Piper TTS add-on running
+    - snapcast-ha-player installed (HACS)
+    - SSH key configured between HA and Pi (/config/id_rsa)
+    - Shell commands defined in configuration.yaml
+    - Snapcast group IDs verified and correct in shell commands
+
+trigger:
+  - platform: time_pattern
+    minutes: "0"
+
+condition:
+  - condition: time
+    after: "06:00:00"
+    before: "01:00:00"
+
+action:
+  # Generate TTS audio URL using Chime TTS + Piper
+  - action: chime_tts.say_url
+    data:
+      message: "It is {{ now().strftime('%-I %p') }}"
+      tts_platform: tts.piper
+    response_variable: tts_response
+
+  # Play in Kitchen
+  - action: shell_command.tts_switch_kitchen
+    data: {}
+  - action: shell_command.tts_announce
+    data:
+      url: "{{ tts_response.url }}"
+  - delay:
+      seconds: "{{ [tts_response.duration | int + 3, 5] | max }}"
+  - action: shell_command.tts_restore_kitchen
+    data: {}
+
+  # Play in Dining Room
+  - action: shell_command.tts_switch_dining
+    data: {}
+  - action: shell_command.tts_announce
+    data:
+      url: "{{ tts_response.url }}"
+  - delay:
+      seconds: "{{ [tts_response.duration | int + 3, 5] | max }}"
+  - action: shell_command.tts_restore_dining
+    data: {}
+
+mode: single
