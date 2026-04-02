@@ -11,6 +11,20 @@ A self-hosted, whole-home multi-zone audio system using a Raspberry Pi 4, Snapca
 - **Hourly time announcements** — Piper TTS via Chime TTS piped to ceiling speakers
 - **Snapweb UI** — Browser-based zone management at `http://audioplayer.local:1780`
 
+## Hardware Shopping List
+
+| Item | Notes |
+|---|---|
+| [Fosi Audio ZA3 Amplifier](https://www.amazon.com/s?k=fosi+audio+za3) | TPA3255, 180W stereo, XLR/RCA inputs |
+| [48V 5A DC Power Supply](https://www.amazon.com/s?k=48v+5a+power+supply+center+positive) | One per ZA3, center positive barrel connector |
+| [Sabrent USB Audio Adapter](https://www.amazon.com/s?k=sabrent+au-mmsa) | USB DAC, one per zone |
+| [3.5mm to Dual RCA Cable](https://www.amazon.com/s?k=3.5mm+to+rca+cable) | Connects Sabrent to ZA3 |
+| [Raspberry Pi 4 (4GB)](https://www.amazon.com/s?k=raspberry+pi+4+4gb) | Central hub running all software |
+| [USB-A Extension Cables](https://www.amazon.com/s?k=usb+a+male+to+female+extension+6+inch) | For spacing multiple Sabrents on Pi USB ports |
+
+**Cost per zone (approximate):** ~$170 (ZA3 + PSU + Sabrent + cables)  
+**Central hub:** ~$55 (Pi 4 4GB)
+
 ## Hardware
 
 ### Per Zone
